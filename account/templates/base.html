@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{%block title%} {%endblock%}</title>
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+    {% if messages %}
+    {% for message in messages %}
+    {{message}}{%endfor%}
+    {%endif%}
+    <nav  class="navbar navbar-expand-lg navbar-info bg-light">
+
+    <a href="{% url 'places' %}"> Home</a>
+
+
+      {% if user.is_authenticated %}
+      <a href="{%url 'myplaces' %}" class="btn btn-link"> My_places</a>
+      <a href="{%url 'edit' %}" class="btn btn-link"> Profile </a>
+      <a href="{% url 'logout' %}" class="btn btn-link" >logout</a>
+      
+      {%else%}
+      <span>    <a href="{%url 'login'%}" class="btn btn-link">login</a>
+          <a href="{%url 'register'%}">create a account</a></span>
+
+      {%endif%}
+
+    </nav>
+
+    {%block body%}
+    {%endblock%}
+
+  </body>
+</html>

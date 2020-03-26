@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{%block title%}places{%endblock%}
+
+{%block body %}
+
+<input type="text" placeholder="Search.." id="myInput" onkeyup="searchFun()">
+   <table id='myTable'>
+     <tr class='header'>
+      <th style="width:40%;">Places</th>
+     </tr>
+           {% for result in places %}
+           <tr>
+             <td><div class="card " >
+               <div class="card-body">
+                 <h3 class="card-title">{{result.name}}</h3>
+                 <p class="card-text">Address:{{result.addr}}</p>
+                 <p class="card-text"> time: {{result.open_time}} to {{result.close_time}}</p>
+                 <a href="{% url 'addplace' result.id %}" class="btn btn-primary">Add to my Places</a>
+
+
+               </div>
+             </div></td>
+             <!-- <td>{{result.hospital_address}}</td> -->
+           </tr>
+           {% endfor %}
+   </table>
+
+
+
+<script>
+const searchFun=()=> {
+ let filter=document.getElementById('myInput').value.toUpperCase();
+ let myTable=document.getElementById('myTable');
+ let tr=myTable.getElementsByTagName('tr');
+ for(var i=0; i<tr.length; i++){
+   let td=tr[i].getElementsByTagName('td')[0];
+   if(td){
+     let textvalue=td.textContent || td.innerHTML;
+     if(textvalue.toUpperCase().indexOf(filter) > -1){
+       tr[i].style.display='';
+     }else{
+       tr[i].style.display='none';
+     }
+   }
+ }
+}
+</script>
+
+{%endblock%}

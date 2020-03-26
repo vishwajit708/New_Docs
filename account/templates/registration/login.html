@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+
+{%block title%}log-in{%endblock%}
+
+{%block body%}
+<form class="" action="{%url 'login'%}" method="post">
+  {%csrf_token%}
+  {{form.as_p}}
+  <p><input type="submit" value="Log-in" class="btn btn-primary">
+    <a href="{% url 'register' %}" class="btn btn-info">Create account</a>
+  </p>
+</form>
+
+<p><a href="{% url "password_reset" %}" class="btn btn-secondary">Forgotten your
+password?</a> </p>
+<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+{%endblock%}
